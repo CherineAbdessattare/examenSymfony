@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title%} Liste des produits par nom{% endblock %}
+{% block body %}
+{{ form_start(form) }}
+<div class="form-row align-items-end" >
+<div class="col">
+ {{ form_row(form.categoryproduit) }}
+</div>
+ <div class="col">
+ <div class="form-group">
+ <button type="submit" class="btn btn-success">Rechercher</button>
+ </div>
+</div>
+</div>
+{{ form_end(form) }}
+{% if products%}
+ <table id="products" class="table table-striped">
+ <thead>
+    <tr>
+    <th>Nom</th>
+    <th>description</th>
+    <th>prix</th>
+    <th>image</th>
+    </tr>
+ </thead>
+ <tbody>
+ {% for product in products %}
+ <tr>
+ <td>{{ product.nom }}</td>
+ <td>{{ product.prix }}</td>
+ <td>{{ product.description }}</td>
+ <td>{{ product.image }}</td>
+ <td>
+ <a href="/product/{{ product.id }}" class="btn btndark">Détails</a>
+ </td>
+ </tr>
+ {% endfor %}
+ </tbody>
+ </table>
+ {% else %}
+ <p>Aucun products</p>
+ {% endif %}
+{% endblock %}

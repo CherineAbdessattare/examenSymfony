@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block title%} Liste des Produits{% endblock %}
+{% block body %}
+{{ form_start(form) }}
+<div class="form-row align-items-end" >
+<div class="col">
+{{ form_row(form.nom) }}
+</div>
+ <div class="col">
+ <div class="form-group">
+ <button type="submit" class="btn btn-success">Rechercher</button>
+ </div>
+</div>
+</div>
+{{ form_end(form) }}
+{% if products %}
+ <table id="products" class="table table-striped">
+    <thead>
+        <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Prix</th>
+        <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+        <td>{{ product.nom }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.prix }}</td>
+        <td>{{ product.image }}</td>
+        <td>
+        <a href="/product/{{ product.id }}" class="btn btn-dark">Détails</a>
+        <!-- <a href="/product/edit/{{ product.id }}" class="btn btn-dark">Modifier</a>
+        <a href="#" class="btn btn-danger delete-article" data-id="{{ product.id }}" role="button">Supprimer</a> -->
+        </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+ </table>
+ {% else %}
+ <p>Aucun produits</p>
+ {% endif %}
+{% endblock %}
+{% block javascripts %}
+    <script src='js/main.js'></script>
+{% endblock %}
